@@ -2,6 +2,8 @@ import CoreGraphics
 
 public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
     let context: CGContext
+    public var width: Int { context.width }
+    public var height: Int { context.width }
     
     public init(width: Int, height: Int) where ColorSpaceType == RGBAColorSpace {
         let context = CGContext(

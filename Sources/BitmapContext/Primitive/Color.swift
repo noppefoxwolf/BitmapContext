@@ -25,9 +25,9 @@ public struct RGBAColor: Color {
     public var cgColor: CGColor {
         CGColor(
             srgbRed: Double(red) / Double(ComponentType.max),
-            green: Double(red) / Double(ComponentType.max),
-            blue: Double(red) / Double(ComponentType.max),
-            alpha: Double(red) / Double(ComponentType.max)
+            green: Double(green) / Double(ComponentType.max),
+            blue: Double(blue) / Double(ComponentType.max),
+            alpha: Double(alpha) / Double(ComponentType.max)
         )
     }
 }

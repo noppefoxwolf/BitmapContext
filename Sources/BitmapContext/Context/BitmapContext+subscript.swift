@@ -1,12 +1,12 @@
 import CoreGraphics
 
 extension BitmapContext {
-    public subscript(point point: Point) -> ColorSpaceType.PixelType? {
+    public subscript(point point: Point) -> ColorSpaceType.ColorType? {
         get { context[point: point.simd] }
         set { context[point: point.simd] = newValue }
     }
     
-    public subscript(index index: Int) -> ColorSpaceType.PixelType? {
+    public subscript(index index: Int) -> ColorSpaceType.ColorType? {
         get { context[index: index] }
         set { context[index: index] = newValue }
     }
@@ -14,7 +14,7 @@ extension BitmapContext {
 
 extension CGContext {
     @inlinable
-    subscript<T: Pixel>(byteOffset offset: Int) -> T? {
+    subscript<T: Color>(byteOffset offset: Int) -> T? {
         get {
             guard offset < dataLength else { return nil }
             return data?.load(
@@ -34,7 +34,7 @@ extension CGContext {
 
 extension CGContext {
     @inlinable
-    subscript<T: Pixel>(index index: Int) -> T? {
+    subscript<T: Color>(index index: Int) -> T? {
         get {
             self[byteOffset: index * MemoryLayout<T>.size]
         }
@@ -46,7 +46,7 @@ extension CGContext {
 
 extension CGContext {
     @inlinable
-    subscript<T: Pixel>(point point: SIMD2<Int>) -> T? {
+    subscript<T: Color>(point point: SIMD2<Int>) -> T? {
         get {
             self[byteOffset: offset(x: point.x, y: point.y)]
         }

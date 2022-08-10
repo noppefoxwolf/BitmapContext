@@ -1,12 +1,12 @@
 import CoreGraphics
 
 extension BitmapContext {
-    public var pixels: PixelSequence<ColorSpaceType.PixelType> {
-        PixelSequence<ColorSpaceType.PixelType>(context: context)
+    public var pixels: PixelSequence<ColorSpaceType.ColorType> {
+        PixelSequence<ColorSpaceType.ColorType>(context: context)
     }
 }
 
-public struct PixelSequence<T: Pixel>: Sequence {
+public struct PixelSequence<T: Color>: Sequence {
     let context: CGContext
     
     public func makeIterator() -> PixelIterator<T> {
@@ -14,7 +14,7 @@ public struct PixelSequence<T: Pixel>: Sequence {
     }
 }
 
-public struct PixelIterator<Element: Pixel>: IteratorProtocol {
+public struct PixelIterator<Element: Color>: IteratorProtocol {
     private let context: CGContext
     private var currentOffset: Int
 

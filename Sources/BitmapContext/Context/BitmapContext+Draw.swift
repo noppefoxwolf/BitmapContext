@@ -5,20 +5,16 @@ extension BitmapContext {
         context.addPath(path)
     }
     
-    public func setStrokeColor(_ color: CGColor) {
-        context.setStrokeColor(color)
+    public func setStrokeColor(_ color: ColorSpaceType.ColorType) {
+        context.setStrokeColor(color.cgColor)
     }
     
     public func strokePath() {
         context.strokePath()
     }
     
-    public func setFillColor(red: Double, green: Double, blue: Double, alpha: Double) where ColorSpaceType == RGBAColorSpace {
-        context.setFillColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
-    
-    public func setFillColor(gray: Double, alpha: Double) where ColorSpaceType == GrayColorSpace {
-        context.setFillColor(gray: gray, alpha: alpha)
+    public func setFillColor(_ color: ColorSpaceType.ColorType) {
+        context.setFillColor(color.cgColor)
     }
     
     public func fillPath(using: CGPathFillRule = .winding) {

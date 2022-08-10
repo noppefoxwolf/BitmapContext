@@ -20,7 +20,7 @@ extension BitmapContext: Codable {
             width: width,
             height: height,
             bitsPerComponent: 8,
-            bytesPerRow: MemoryLayout<ColorSpaceType.PixelType>.size * width,
+            bytesPerRow: MemoryLayout<ColorSpaceType.ColorType>.size * width,
             space: ColorSpaceType.colorSpace,
             bitmapInfo: bitmapInfo
         )!

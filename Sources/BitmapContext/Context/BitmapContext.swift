@@ -10,8 +10,8 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
             data: nil,
             width: width,
             height: height,
-            bitsPerComponent: ColorSpaceType.PixelType.ComponentType.bitWidth,
-            bytesPerRow: MemoryLayout<ColorSpaceType.PixelType>.size * width,
+            bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,
+            bytesPerRow: MemoryLayout<ColorSpaceType.ColorType>.size * width,
             space: ColorSpaceType.colorSpace,
             bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Little.rawValue
         )!
@@ -25,8 +25,8 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
             data: nil,
             width: width,
             height: height,
-            bitsPerComponent: ColorSpaceType.PixelType.ComponentType.bitWidth,
-            bytesPerRow: MemoryLayout<ColorSpaceType.PixelType>.size * width,
+            bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,
+            bytesPerRow: MemoryLayout<ColorSpaceType.ColorType>.size * width,
             space: ColorSpaceType.colorSpace,
             bitmapInfo: CGImageAlphaInfo.none.rawValue
         )!

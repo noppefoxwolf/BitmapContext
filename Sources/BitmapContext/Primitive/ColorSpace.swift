@@ -1,16 +1,16 @@
 import CoreGraphics
 
 public protocol ColorSpace {
-    associatedtype PixelType: Pixel
+    associatedtype ColorType: Color
     static var colorSpace: CGColorSpace { get }
 }
 
 public struct RGBAColorSpace: ColorSpace {
-    public typealias PixelType = RGBAPixel
+    public typealias ColorType = RGBAColor
     public static var colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
 }
 
 public struct GrayColorSpace: ColorSpace {
-    public typealias PixelType = MonochromePixel
+    public typealias ColorType = GrayColor
     public static var colorSpace: CGColorSpace = CGColorSpaceCreateDeviceGray()
 }

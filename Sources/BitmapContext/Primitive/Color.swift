@@ -77,6 +77,6 @@ public struct GrayColor: Color {
     public func next() -> GrayColor {
         var color = self
         color.gray = color.gray &+ 1
-        return self
+        return color
     }
 }

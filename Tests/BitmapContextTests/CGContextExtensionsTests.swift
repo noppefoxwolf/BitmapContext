@@ -5,7 +5,7 @@ import CoreGraphics
 final class CGContextExtensionsTests: XCTestCase {
     func testExample() throws {
         let context = BitmapContext<RGBAColorSpace>(width: 16, height: 16)
-        context.setFillColor(RGBAColor(red: 255, green: 0, blue: 0, alpha: 255))
+        context.setFillColor(RGBAColor(red: .max, green: .min, blue: .min, alpha: .max))
         context.addPath(CGPath(rect: CGRect(x: 0, y: 0, width: 8, height: 8), transform: nil))
         context.fillPath()
         let image1 = UIImage(bitmap: context.makeImage()!)
@@ -17,7 +17,7 @@ final class CGContextExtensionsTests: XCTestCase {
     
     func testExample2() throws {
         let context = BitmapContext<GrayColorSpace>(width: 16, height: 16)
-        context.setFillColor(GrayColor(gray: 255))
+        context.setFillColor(GrayColor(gray: .max))
         context.addPath(CGPath(rect: CGRect(x: 0, y: 0, width: 8, height: 8), transform: nil))
         context.fillPath()
         let image1 = UIImage(bitmap: context.makeImage()!)

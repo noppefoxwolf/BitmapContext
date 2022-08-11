@@ -1,6 +1,6 @@
 import CoreGraphics
 
-extension BitmapContext {
+extension BitmapContext: PathDrawable {
     public func addPath(_ path: CGPath) {
         context.addPath(path)
     }
@@ -33,3 +33,4 @@ extension BitmapContext {
         context.makeImage().map(BitmapImage.init(image:))
     }
 }
+

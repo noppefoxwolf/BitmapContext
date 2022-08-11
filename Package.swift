@@ -19,6 +19,10 @@ let package = Package(
         ),
         .testTarget(
             name: "BitmapContextTests",
-            dependencies: ["BitmapContext"]),
+            dependencies: ["BitmapContext"],
+            resources: [
+                .copy("Resource")
+            ]
+        ),
     ]
 )

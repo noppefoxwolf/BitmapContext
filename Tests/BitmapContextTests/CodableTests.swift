@@ -2,8 +2,8 @@ import XCTest
 @testable import BitmapContext
 import CoreGraphics
 
-final class CGContextExtensionsTests: XCTestCase {
-    func testExample() throws {
+final class CodableTests: XCTestCase {
+    func testColorCodable() throws {
         let context = BitmapContext<RGBAColorSpace>(width: 16, height: 16)
         context.setFillColor(RGBAColor(red: .max, green: .min, blue: .min, alpha: .max))
         context.addPath(CGPath(rect: CGRect(x: 0, y: 0, width: 8, height: 8), transform: nil))
@@ -15,7 +15,7 @@ final class CGContextExtensionsTests: XCTestCase {
         XCTAssertEqual(image1.pngData(), image2.pngData())
     }
     
-    func testExample2() throws {
+    func testGrayCodable() throws {
         let context = BitmapContext<GrayColorSpace>(width: 16, height: 16)
         context.setFillColor(GrayColor(gray: .max))
         context.addPath(CGPath(rect: CGRect(x: 0, y: 0, width: 8, height: 8), transform: nil))

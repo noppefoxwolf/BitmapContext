@@ -30,6 +30,10 @@ public struct RGBAColor: Color {
         set { rawValue = rawValue & 0xFFFFFF00 | (UInt32(newValue) << 0) }
     }
     
+    init(rawValue: UInt32) {
+        self.rawValue = rawValue
+    }
+    
     public init(
         red: ComponentType,
         green: ComponentType,

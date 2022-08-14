@@ -31,12 +31,13 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
             space: ColorSpaceType.colorSpace,
             bitmapInfo: CGImageAlphaInfo.none.rawValue
         )!
+        context.setAllowsAntialiasing(false)
+        context.interpolationQuality = .none
         self.init(context: context)
     }
     
-    internal init(context: CGContext) {
-        context.setAllowsAntialiasing(false)
-        context.interpolationQuality = .none
+    @_spi(BitmapExtension)
+    public init(context: CGContext) {
         self.context = context
     }
 }

@@ -1,7 +1,7 @@
 
 import CoreGraphics
 
-public protocol Color: Equatable, Hashable {
+public protocol Color: Equatable, Hashable, Codable {
     associatedtype ComponentType
     
     var cgColor: CGColor { get }

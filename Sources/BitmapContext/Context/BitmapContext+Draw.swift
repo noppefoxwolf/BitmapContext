@@ -29,8 +29,8 @@ extension BitmapContext: PathDrawable {
         context.draw(layer.layer, at: point.cgPoint)
     }
     
-    public func clear(_ rect: CGRect) {
-        context.clear(rect)
+    public func clear(_ rect: Rect) {
+        context.clear(rect.cgRect)
     }
 }
 

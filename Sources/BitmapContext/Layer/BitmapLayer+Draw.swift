@@ -29,7 +29,7 @@ extension BitmapLayer: PathDrawable {
         context.draw(layer, at: point)
     }
     
-    public func clear(_ rect: CGRect) {
+    public func clear(_ rect: Rect) {
         context.clear(rect)
     }
 }

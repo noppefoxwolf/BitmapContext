@@ -17,12 +17,20 @@ extension BitmapContext {
         context.clip(to: to.cgRect)
     }
     
+    public func clip(to: Rect, mask: BitmapImage) {
+        context.clip(to: to.cgRect, mask: mask.image)
+    }
+    
     public func resetClip() {
         context.resetClip()
     }
     
     public func setBlendMode(_ blendMode: CGBlendMode) {
         context.setBlendMode(blendMode)
+    }
+    
+    public func setAlpha(_ alpha: Double) {
+        context.setAlpha(alpha)
     }
     
     public func makeImage() -> BitmapImage? {

@@ -28,6 +28,10 @@ extension BitmapLayer: PathDrawable {
     public func draw(_ layer: BitmapLayer<ColorSpaceType>, at point: Point) {
         context.draw(layer, at: point)
     }
+    
+    public func clear(_ rect: CGRect) {
+        context.clear(rect)
+    }
 }
 
 extension BitmapLayer {

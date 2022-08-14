@@ -9,6 +9,10 @@ extension BitmapContext {
         context.restoreGState()
     }
     
+    public func clip(using rule: CGPathFillRule = .winding) {
+        context.clip(using: rule)
+    }
+    
     public func clip(to: Rect) {
         context.clip(to: to.cgRect)
     }

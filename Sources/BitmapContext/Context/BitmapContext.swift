@@ -14,7 +14,7 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
             bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,
             bytesPerRow: MemoryLayout<ColorSpaceType.ColorType>.size * width,
             space: ColorSpaceType.colorSpace,
-            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue | CGImagePixelFormatInfo.packed.rawValue
         )!
         context.setAllowsAntialiasing(false)
         context.interpolationQuality = .none
@@ -29,7 +29,7 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
             bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,
             bytesPerRow: MemoryLayout<ColorSpaceType.ColorType>.size * width,
             space: ColorSpaceType.colorSpace,
-            bitmapInfo: CGImageAlphaInfo.none.rawValue
+            bitmapInfo: CGImageAlphaInfo.none.rawValue | CGImageByteOrderInfo.orderDefault.rawValue | CGImagePixelFormatInfo.packed.rawValue
         )!
         context.setAllowsAntialiasing(false)
         context.interpolationQuality = .none

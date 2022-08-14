@@ -16,6 +16,11 @@ public struct BitmapLayer<ColorSpaceType: ColorSpace> {
         self.layer = CGLayer(context.context, size: size, auxiliaryInfo: nil)!
     }
     
+    @_spi(BitmapExtension)
+    public init(layer: CGLayer) {
+        self.layer = layer
+    }
+    
     var context: BitmapContext<ColorSpaceType> {
         BitmapContext<ColorSpaceType>(context: layer.context!)
     }

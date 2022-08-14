@@ -49,6 +49,79 @@ final class ColorTests: XCTestCase {
         let diff = GrayColor(gray: 0)
         XCTAssertEqual(color.next(), diff)
     }
+    
+    func test32Big() {
+        let context = CGContext(data: nil, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)!
+        context.setFillColor(red: 0, green: 0, blue: 1, alpha: 1)
+        context.addPath(CGPath(rect: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)), transform: nil))
+        context.fillPath()
+        
+        let ctxData = context.data!
+        
+        // 00 00 FF FF // R G B A
+        let color = ctxData.load(as: RGBAColor.self)
+        // rawValueはUInt32 = littleEndianなので逆転している
+        XCTAssertNotEqual(color.rawValue, 0x0000FFFF)
+        struct Value {
+            let r,g,b,a: UInt8
+        }
+        let color2 = ctxData.load(as: Value.self)
+        XCTAssertEqual(color2.r, 0)
+        XCTAssertEqual(color2.g, 0)
+        XCTAssertEqual(color2.b, 255)
+        XCTAssertEqual(color2.a, 255)
+    }
+    
+    func test32Little() {
+        let context = CGContext(data: nil, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Little.rawValue)!
+        context.setFillColor(red: 0, green: 0, blue: 1, alpha: 1)
+        context.addPath(CGPath(rect: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)), transform: nil))
+        context.fillPath()
+        
+        let ctxData = context.data!
+        
+        // FF FF 00 00 // A B G R
+        let color = ctxData.load(as: RGBAColor.self)
+        XCTAssertEqual(color.rawValue, 0x0000FFFF)
+        
+        struct Value {
+            let r,g,b,a: UInt8
+        }
+        let color2 = ctxData.load(as: Value.self)
+        XCTAssertNotEqual(color2.r, 0)
+        XCTAssertNotEqual(color2.g, 0)
+        XCTAssertNotEqual(color2.b, 255)
+        XCTAssertNotEqual(color2.a, 255)
+    }
+    
+    func testEndian() {
+        var color = RGBAColor(byteOrder32Big: 0x0000FFFF)
+        XCTAssertEqual(color.blue, 0x00)
+        color.red = 0xEE
+        XCTAssertEqual(color.rawValue, 0x0000FFEE)
+    }
+    
+    func testLoad() {
+        // FF FF 00 00 // A B G R
+        struct Value1 {
+            let a,b,c,d: UInt8
+        }
+        struct Value2 {
+            let a: UInt32
+        }
+        var data = Data([0x00, 0x00, 0xFF, 0xFF])
+        //UnsafeMutableRawPointer
+        data.withUnsafeBytes { pointer in
+            // リトルエンディアンで取得されるので、UInt32とかにすると値がずれる
+            let value1 = pointer.load(as: Value1.self)
+            XCTAssertEqual(value1.a, 0)
+            XCTAssertEqual(value1.b, 0)
+            XCTAssertEqual(value1.c, 255)
+            XCTAssertEqual(value1.d, 255)
+            let value2 = pointer.load(as: Value2.self)
+            XCTAssertEqual(value2.a, 0xFFFF0000)
+        }
+    }
 }
 
 

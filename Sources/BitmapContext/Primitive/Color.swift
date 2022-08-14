@@ -14,23 +14,24 @@ public struct RGBAColor: Color {
     var rawValue: UInt32
     
     public var red: ComponentType {
-        get { UInt8((rawValue & 0xFF000000) >> 24) }
-        set { rawValue = rawValue & 0x00FFFFFF | (UInt32(newValue) << 24) }
-    }
-    public var green: ComponentType {
-        get { UInt8((rawValue & 0x00FF0000) >> 16) }
-        set { rawValue = rawValue & 0xFF00FFFF | (UInt32(newValue) << 16) }
-    }
-    public var blue: ComponentType {
-        get { UInt8((rawValue & 0x0000FF00) >> 8) }
-        set { rawValue = rawValue & 0xFFFF00FF | (UInt32(newValue) << 8) }
-    }
-    public var alpha: ComponentType {
         get { UInt8((rawValue & 0x000000FF) >> 0) }
         set { rawValue = rawValue & 0xFFFFFF00 | (UInt32(newValue) << 0) }
     }
+    public var green: ComponentType {
+        get { UInt8((rawValue & 0x0000FF00) >> 8) }
+        set { rawValue = rawValue & 0xFFFF00FF | (UInt32(newValue) << 8) }
+    }
+    public var blue: ComponentType {
+        get { UInt8((rawValue & 0x00FF0000) >> 16) }
+        set { rawValue = rawValue & 0xFF00FFFF | (UInt32(newValue) << 16) }
+    }
+    public var alpha: ComponentType {
+        get { UInt8((rawValue & 0xFF000000) >> 24) }
+        set { rawValue = rawValue & 0x00FFFFFF | (UInt32(newValue) << 24) }
+    }
     
-    init(rawValue: UInt32) {
+    // 32big
+    init(byteOrder32Big rawValue: UInt32) {
         self.rawValue = rawValue
     }
     

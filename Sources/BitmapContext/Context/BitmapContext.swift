@@ -1,13 +1,14 @@
 import CoreGraphics
+import Foundation
 
 public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
     let context: CGContext
     public var width: Int { context.width }
     public var height: Int { context.height }
     
-    public init(width: Int, height: Int) where ColorSpaceType == RGBAColorSpace {
+    public init(data: Data? = nil, width: Int, height: Int) where ColorSpaceType == RGBAColorSpace {
         let context = CGContext(
-            data: nil,
+            data: data.map(NSMutableData.init(data:))?.mutableBytes,
             width: width,
             height: height,
             bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,
@@ -20,9 +21,9 @@ public struct BitmapContext<ColorSpaceType> where ColorSpaceType: ColorSpace {
         self.init(context: context)
     }
     
-    public init(width: Int, height: Int) where ColorSpaceType == GrayColorSpace {
+    public init(data: Data? = nil, width: Int, height: Int) where ColorSpaceType == GrayColorSpace {
         let context = CGContext(
-            data: nil,
+            data: data.map(NSMutableData.init(data:))?.mutableBytes,
             width: width,
             height: height,
             bitsPerComponent: ColorSpaceType.ColorType.ComponentType.bitWidth,

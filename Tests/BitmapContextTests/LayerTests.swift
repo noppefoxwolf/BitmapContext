@@ -1,6 +1,9 @@
 import XCTest
 @testable import BitmapContext
 
+#if canImport(UIKit)
+import UIKit
+
 final class LayerTests: XCTestCase {
     func testLayerDraw() {
         let context = BitmapContext<RGBAColorSpace>(width: 16, height: 16)
@@ -13,3 +16,4 @@ final class LayerTests: XCTestCase {
         XCTAssertEqual(image.pngData()!, diff.pngData()!)
     }
 }
+#endif
